@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "standard": "^17.0.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/standard/eslintc.json"
+    ]
+  },
+  "dependencies": {
+    "@react-three/cannon": "6.5.2",
+    "@react-three/drei": "9.56.17",
+    "@react-three/fiber": "8.10.4"
+  }
+}
