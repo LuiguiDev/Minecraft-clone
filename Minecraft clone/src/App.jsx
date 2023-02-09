@@ -4,6 +4,7 @@ import { Physics } from '@react-three/cannon';
 import { Ground } from './components/Ground';
 import { Fpv } from './components/Fpv';
 import { Player } from './components/Player';
+import SphereOne from './components/SphereOne';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <ambientLight intensity={0.5}/>
       <Fpv />
       <Physics>
+        <SphereOne />
         <Player />
         <Ground />
       </Physics>

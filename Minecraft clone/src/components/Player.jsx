@@ -5,10 +5,17 @@ import { Vector3 } from "three";
 import { useKeyboard } from "../hooks/useKeyboard";
 
 export const Player = () => {
-  const actions = useKeyboard()
+  const {
+    moveBackward,
+    moveForward,
+    moveLeft,
+    moveRight,
+    jump
+  } = useKeyboard()
+
   const { camera } = useThree()
   const [ref, api] = useSphere(() => ({
-    mass: 1,
+    mass: 10,
     type: 'Dynamic',
     position: [0, 0, 0]
   }))
@@ -37,7 +44,39 @@ export const Player = () => {
       )
     )
     api.velocity.set(0, 0, 0)
+
+    const direction = new Vector3()
+    const frontVector = new Vector3(
+      0, // x
+      0, // y
+      (moveBackward ? 1 : 0) - (moveForward ? 1 : 0) // z
+    )
+    const sideVector = new Vector3(
+      (moveLeft ? 1 : 0) - (moveRight ? 1 : 0),
+      0,
+      0 
+    )
+    
+    direction
+      .subVectors(frontVector, sideVector)
+      .normalize()
+      .multiplyScalar(2) // speed
+      .applyEuler(camera.rotation);
+
+    api.velocity.set(
+      direction.x,
+      vel.current[1],
+      direction.z
+    );
+    if(jump) {
+      api.velocity.set(
+        vel.current[0], // preserve current force
+        4, // set new force to Y (up-down)
+        vel.current[2] // preserve current force
+      )
+    }
   })
+
 
   return (
     <mesh ref={ref} />

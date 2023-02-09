@@ -47,7 +47,7 @@ export const useKeyboard = () => {
 
       if(action) { // Only if the key is on dictionary
         setActions(prevActions => ({
-          // Return the dafault statu (false) when the key is released
+          // Return default status (false) when the key is released
           ...prevActions,
           [action]: false
         })) 
@@ -55,10 +55,11 @@ export const useKeyboard = () => {
     }
   
     document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('keydup', handleKeyUp);
+    document.addEventListener('keyup', handleKeyUp);
   
     return () => {
-      document.removeEventListener('keydown', handleKeyDown)
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keyup', handleKeyUp)
     };
   }, [])
   
