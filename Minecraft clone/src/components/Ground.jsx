@@ -10,7 +10,7 @@ export function Ground() {
   }))
 
   groundTexture.repeat.set(100, 100)
-
+  console.log(groundTexture)
   return (
     <mesh ref={ref}>
       <planeBufferGeometry attach='geometry' args={[100, 100]} />
